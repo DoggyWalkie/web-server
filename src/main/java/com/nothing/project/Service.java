@@ -6,6 +6,8 @@ import org.web3j.protocol.core.RemoteCall;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Service {
     protected Dogi contract;
@@ -23,5 +25,29 @@ public class Service {
         RemoteCall<BigInteger> tokens = contract.tokenByIndex(tokenId);
         BigInteger token = tokens.send();
         return token;
+    }
+
+    public List<BigInteger> loadTokensByList(List<BigInteger> tokenIds) {
+        List<BigInteger> tokens = new ArrayList<>();
+        for (BigInteger tokenId : tokenIds) {
+            try {
+                tokenIds.add(loadToken(tokenId));
+            } catch (Exception e) {
+                //todo
+            }
+        }
+        return tokens;
+    }
+
+    public List<BigInteger> loadTokensByGap(BigInteger from, BigInteger to) {
+        List<BigInteger> tokens = new ArrayList<>();
+        for (BigInteger i = to; i.compareTo(from) >= 0; i = i.subtract(BigInteger.ONE)) {
+            try {
+                tokens.add(loadToken(i));
+            } catch (Exception e) {
+                //todo
+            }
+        }
+        return tokens;
     }
 }
