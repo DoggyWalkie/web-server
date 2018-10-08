@@ -14,7 +14,7 @@ public class Main {
         Credentials credentials = Credentials.create(privateKey);
         BigInteger GAS_PRICE = new BigInteger("3452345");
         BigInteger GAS_LIMIT = new BigInteger("3412342134");
-        Dogi contract = Dogi.load(
+        DoggyWalkie contract = DoggyWalkie.load(
                 "0x7d3451ff4C954918697530c58F09BD1FB648BF7A",
                 web3j,
                 credentials,

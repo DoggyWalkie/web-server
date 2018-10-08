@@ -26,14 +26,15 @@ public class ServiceTest {
 
     @Before
     public void setUp() {
-        address = "0x7d3451ff4C954918697530c58F09BD1FB648BF7A";
+//        address = "0x7d3451ff4C954918697530c58F09BD1FB648BF7A";
+        address = "0xf4A1f285B2b539b629f8d3C8c66A63977Cd0a030";
         web3j = Web3j.build(new HttpService("https://kovan.infura.io/<your-token>"));
         String privateKey = "21E8B3A3EDA8C296BB6C54246E66258C6F407DA36B15596469ABB28558CA04E4";
         credentials = Credentials.create(privateKey);
         GAS_PRICE = new BigInteger("3");
         GAS_LIMIT = new BigInteger("228080");
         timestamps = "1540011905:1540021905";
-        tokenId = new BigInteger("2");//unique
+        tokenId = new BigInteger("12");//unique
         to = "0x54A2cCe3a2feDA41c747EE50d08D8836F54878Ef";
         service = new Service(address, web3j, credentials, GAS_PRICE, GAS_LIMIT);
     }
@@ -66,13 +67,13 @@ public class ServiceTest {
 
     @Test
     public void getTokensByGap() {
-        BigInteger from = new BigInteger("0");
-        BigInteger to = new BigInteger("3");
+        BigInteger from = new BigInteger("9");
+        BigInteger to = new BigInteger("12");
         List<BigInteger> tokensExpected = new ArrayList<>() {{
-            add(new BigInteger("3"));
-            add(new BigInteger("2"));
-            add(new BigInteger("1"));
-            add(new BigInteger("0"));
+            add(new BigInteger("12"));
+            add(new BigInteger("11"));
+            add(new BigInteger("10"));
+            add(new BigInteger("9"));
         }};
         List<BigInteger> tokensActual = service.loadTokensByGap(from, to);
         System.out.println(tokensActual);

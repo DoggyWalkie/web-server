@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
-    protected Dogi contract;
+    protected DoggyWalkie contract;
 
     public Service(String address, Web3j web3j, Credentials credentials,BigInteger gasPrice, BigInteger gasLimit) {
-        contract = Dogi.load(address, web3j, credentials, gasPrice, gasLimit);
+        contract = DoggyWalkie.load(address, web3j, credentials, gasPrice, gasLimit);
     }
 
     public void deployToken(String to, BigInteger tokenId, String timestamps) throws Exception {
@@ -49,5 +49,10 @@ public class Service {
             }
         }
         return tokens;
+    }
+
+    public Object getTokenUri(BigInteger tokenId) throws Exception {
+        RemoteCall tokenURI = contract.tokenURI(tokenId);
+        return tokenURI.send();
     }
 }
